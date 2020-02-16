@@ -98,14 +98,13 @@ function cardButtonConditionals(event) {
   }
 }
 
-
 function displayDirections(event) {
   let newRecipeInfo = cookbook.recipes.find(recipe => {
     if (recipe.id === Number(event.target.id)) {
       return recipe;
     }
   })
-  let recipeObject = new Recipe(newRecipeInfo, ingredientsData);
+  let recipeObject = new Recipe(newRecipeInfo, ingredientData);
   let cost = recipeObject.calculateCost()
   let costInDollars = (cost / 100).toFixed(2)
   cardArea.classList.add('all');
