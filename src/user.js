@@ -1,10 +1,13 @@
+
+
 class User {
   constructor(id, name, pantry) {
     this.id = id;
     this.name = name;
     this.pantry = pantry;
     this.favoriteRecipes = [];
-
+    this.recipesToCook = [];
+    this.cookedRecipes = [];
   }
 
   addToFavorites(recipe) {
@@ -32,6 +35,10 @@ class User {
       });
     });
   }
+
+  // checkPantry() {
+    //sends a call to the pantry class where methods already exist
+  // }
 }
 
 
