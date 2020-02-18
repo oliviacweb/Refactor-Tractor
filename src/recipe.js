@@ -9,6 +9,10 @@ class Recipe {
     this.image = recipe.image;
   }
 
+  getRecipeInstructions () {
+    return this.instructions
+  }
+  
   calculateCost() {
     let costCounter = 0;
     this.ingredients.forEach(ingredient => {
@@ -20,6 +24,7 @@ class Recipe {
       })
     });
     return costCounter;
+    // does the DOM handle converting this to dollars?
   }
 
 }

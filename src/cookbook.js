@@ -11,6 +11,10 @@ class Cookbook {
       });
     })
   }
+  
+  filterRecipeByTag () {
+    
+  }
 }
 
 export default Cookbook;
