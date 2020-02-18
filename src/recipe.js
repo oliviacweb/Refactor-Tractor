@@ -9,18 +9,26 @@ class Recipe {
     this.image = recipe.image;
   }
 
+  getRecipeInstructions () {
+    return this.instructions
+  }
+  
   calculateCost() {
     let costCounter = 0;
+    let result;
     this.ingredients.forEach(ingredient => {
       this.ingredientsData.find(specificIngredient => {
         if (specificIngredient.id === ingredient.id) {
           costCounter += (Number(specificIngredient.estimatedCostInCents) *
-          Number(ingredient.quantity.amount))
+          Number(ingredient.quantity.amount)) 
+          result = costCounter
         }
       })
     });
-    return costCounter;
+    return result;
+    // does the DOM handle converting this to dollars?
   }
+  //sad paths
 
 }
 
