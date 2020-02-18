@@ -12,75 +12,53 @@ beforeEach(() => {
 
 describe('Recipe', () => {
 
-    it.skip('should be an instance of recipe', () => {
-
+    it('should be an instance of recipe', () => {
+      expect(recipe).to.be.an.instanceOf(Recipe);
     });
 
-    it.skip('should be have an id', () => {
-
+    it('should be have an id', () => {
+      expect(recipe.id).to.equal(601216);
     });
 
-    it.skip('should be have a name', () => {
+    it('should be have a name', () => {
+      expect(recipe.name).to.equal("Farmer’s Market Flatbread Pizza");
+    });
 
+    it('Should hold its own ingredient data', () => {
+      expect(recipe.ingredients).to.equal(recipeData[47].ingredients);
     });
-    //
-    it.skip('Should hold its own ingredient data', () => {
-      // expect(recipe.ingredients).to.equal(recipeData[47].ingredients);
-    });
-    //
 
     describe('ingredients data', () => {
-        it.skip('should be an object', () => {
-
-        });
-    //
-        it.skip('should have a name', () => {
-
-        });
-    //
-        it.skip('should have an id', () => {
-
+        it('should be an array', () => {
+          expect(recipe.ingredients).to.be.a('array');
         });
 
-        it.skip('should have a quantity', () => {
-
+        it('should have a name', () => {
+          expect(recipe.ingredients[0].name).to.equal('cheese');
         });
-        describe('quantity', () => {
-          it.skip('should have an amount', () => {
-
-          });
-
-          it.skip('should have a unit', () => {
-
-          });
-    
+        
+        it('should have an id', () => {
+          expect(recipe.ingredients[0].id).to.equal(1041009);
         });
 
-      it.skip('should have instructions', () => {
-
-      });
-        describe('instructions', () => {
-          it.skip('should be an object', () => {
-
-          })
-
-          it.skip('should have a number', () => {
-
-          });
-
-          it.skip('should an instruction', () => {
-
-          })
+        it('should have a quantity', () => {
+          expect(recipe.ingredients[0].quantity).to.deep.equal({amount: 2, unit: 'tablespoons'});
         });
 
-        it.skip('should have tags that are an array of strings', () => {
+      it('should have instructions', () => {
+        expect(recipe.instructions).to.deep.equal([{
+          number: 1,
+          instruction: 'Saute the zucchini in the olive oil on high heat. Season generously with salt and pepper. Stir and leave alone for a little while, so you get a little bit of texture from the browning on the zucchini.While you’re sauteing, toast the flatbread in the oven at 400 degrees.When the zucchini is soft and just slightly browned, remove from the heat. Take the flatbread out of the oven and spread the zucchini on the flatbread.Top with the fresh tomatoes, cheese, and fresh basil.'
+        },
+        { number: 2, instruction: 'Cut, serve, and enjoy!' }]);
+            });
 
+        it('should have tags that are an array of strings', () => {
+          expect(recipe.tags).to.deep.equal([ 'side dish' ]);
         });
 
-        it.skip('should have have an image', () => {
-
+        it('should have have an image', () => {
+          expect(recipe.image).to.equal('https://spoonacular.com/recipeImages/601216-556x370.jpg')
         });
-
-
   })
 })
