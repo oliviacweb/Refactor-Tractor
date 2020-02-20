@@ -1,5 +1,3 @@
-
-
 class User {
   constructor(id, name, pantry) {
     this.id = id;
@@ -34,6 +32,10 @@ class User {
         return ingredient.name.includes(strgToSrch)
       });
     });
+  }
+
+  saveRecipesToCook(recipe) {
+    this.recipesToCook.push(recipe)
   }
 
   // checkPantry() {

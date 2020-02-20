@@ -28,7 +28,7 @@ class Recipe {
     return result;
     // does the DOM handle converting this to dollars?
   }
-  //sad paths
+  //sad paths?
 
 }
 
