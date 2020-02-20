@@ -290,6 +290,6 @@ describe('pantry', () => {
 
 // want to compare user.pantry to recipe.ingredients 
 // to see if there are the necessary ingredients
-// to cook a specific recipe 
+// to cook a specific recipe are in the user's pantry
 
 
