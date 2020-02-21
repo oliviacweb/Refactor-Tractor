@@ -26,7 +26,32 @@ beforeEach(() => {
     {
       'ingredient': 19304,
       'amount': 3
-    }])
+    },
+    {'ingredient': 1041009,
+    'amount': 1
+    },
+    {
+    'ingredient': 10018413,
+    'amount': 1
+    },
+    {
+    'ingredient': 2044,
+    'amount': 1
+    },
+    {
+    'ingredient': 10111529,
+    'amount': 0.5
+    },
+    {
+    'ingredient': 4053,
+    'amount': 1
+    },
+    {
+    'ingredient': 11477,
+    'amount': 1
+    }
+  ])
+
   userIngredients = user.pantry;
   pantry = new Pantry(userIngredients, allIngredients);
   allIngredients = [{
@@ -272,7 +297,31 @@ describe('pantry', () => {
       {
         'ingredient': 19304,
         'amount': 3
-      }])
+      },
+      {'ingredient': 1041009,
+      'amount': 1
+      },
+      {
+      'ingredient': 10018413,
+      'amount': 1
+      },
+      {
+      'ingredient': 2044,
+      'amount': 1
+      },
+      {
+      'ingredient': 10111529,
+      'amount': 0.5
+      },
+      {
+      'ingredient': 4053,
+      'amount': 1
+      },
+      {
+      'ingredient': 11477,
+      'amount': 1
+      }
+      ])
   })
 
   it('should have access to all ingredients', () => {
@@ -280,16 +329,32 @@ describe('pantry', () => {
   })
 
   it('should evaluate if there are enough ingredients for a recipe', () => {
-    pantry.evaluatePantryForRecipe(recipe1)
-    expect(pantry.evaluatePantryForRecipe(recipe1)).to.equal(false)
-  })
+    pantry.evaluatePantryForRecipe(recipe1);
+    expect(pantry.evaluatePantryForRecipe(recipe1)).to.equal('You dont have enough ingredients for this recipe');
+    pantry.evaluatePantryForRecipe(recipe2);
+    expect(pantry.evaluatePantryForRecipe(recipe2)).to.deep.equal([
+          { ingredient: 1041009, amount: 1 },
+          { ingredient: 10018413, amount: 1 },
+          { ingredient: 2044, amount: 1 },
+          { ingredient: 10111529, amount: 0.5 },
+          { ingredient: 4053, amount: 1 },
+          { ingredient: 11477, amount: 1 }
+    ])
 
+  })
+  it('it should determine the amount of ingrdients are missing', () => {
+    pantry.determineAmountOfIngredientsMissing(recipe2)
+    expect(pantry.determineAmountOfIngredientsMissing(recipe2)).to.deep.equal([
+      {'name': 'fresh basil',
+      'amountMissing': 2},
+      {'name': 'cheese' ,
+      'amountMissing': 1}
+  ])
+  })
 
 
 });
 
-// want to compare user.pantry to recipe.ingredients 
+// want to compare user.pantry to recipe.ingredients
 // to see if there are the necessary ingredients
 // to cook a specific recipe are in the user's pantry
-
-
