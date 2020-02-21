@@ -24,20 +24,32 @@ class Pantry {
       }
     })
 
+    // console.log(this.contents)
     return result
 
   }
 
-   determineAmountOfIngredientsMissing(recipe) {
-       //if the recipe ingredient ID matches the pantry ingredient ID return 
-
-
-       //iterate over the ingredients and
-       //
-       //return value is an object and the object is going to have ingredient id as
-   }
-
-
+  determineAmountOfIngredientsMissing(recipe) {
+       const availableIngredients = this.evaluatePantryForRecipe(recipe);
+       recipe.ingredients.sort((a, b) => {
+         return a.id - b.id;
+       })
+       availableIngredients.sort((a, b) => {
+         return a.ingredient - b.ingredient;
+       })
+       return recipe.ingredients.reduce((itemsToBuy, ingredient) => {
+         let i = 0;
+           let missingItems = {
+              name: ingredient.name,
+              amountMissing: Math.round(ingredient.quantity.amount - availableIngredients[i].amount)
+            }
+          if(!missingItems.amountMissing <= 0) {
+            itemsToBuy.push(missingItems);
+          }
+           i++;
+         return itemsToBuy;
+       }, [])
+    }
 }
 
 export default Pantry;

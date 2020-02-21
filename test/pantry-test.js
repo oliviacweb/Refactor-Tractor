@@ -345,10 +345,10 @@ describe('pantry', () => {
   it('it should determine the amount of ingrdients are missing', () => {
     pantry.determineAmountOfIngredientsMissing(recipe2)
     expect(pantry.determineAmountOfIngredientsMissing(recipe2)).to.deep.equal([
-      {'name': 'cheese' ,
-      'amount missing': 1},
       {'name': 'fresh basil',
-      'amount missing': 2}
+      'amountMissing': 2},
+      {'name': 'cheese' ,
+      'amountMissing': 1}
   ])
   })
 
