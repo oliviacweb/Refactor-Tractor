@@ -1,6 +1,17 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 $primary-background: pink;
+$black: #000;
+$off-white: #EBF5EE;
 
 body {
   background-color: $primary-background;
+}
+
+@mixin black-border($pixel, $color) {
+  border: $pixel solid $color;
+}
+
+@mixin flexed-container($type) {
+  display: flex;
+  justify-content: $type;
 }
