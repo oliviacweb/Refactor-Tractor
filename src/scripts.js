@@ -107,45 +107,41 @@ function displayDirections(event) {
   let recipeObject = new Recipe(newRecipeInfo, ingredientData);
   let cost = recipeObject.calculateCost()
   let costInDollars = (cost / 100).toFixed(2)
-  cardArea.classList.add('all');
-  cardArea.innerHTML = `<h3>${recipeObject.name}</h3>
-  <p class='all-recipe-info'>
-  <strong>It will cost: </strong><span class='cost recipe-info'>
-  $${costInDollars}</span><br><br>
-  <strong>You will need: </strong><span class='ingredients recipe-info'></span>
-  <strong>Instructions: </strong><ol><span class='instructions recipe-info'>
-  </span></ol>
-  </p>`;
-  let ingredientsSpan = document.querySelector('.ingredients');
-  let instructionsSpan = document.querySelector('.instructions');
+  $('.all-cards').addClass('all');
+  $('.all-cards').html(`<h3>${recipeObject.name}</h3>
+    <p class='all-recipe-info'>
+    <strong>It will cost: </strong><span class='cost recipe-info'>
+    $${costInDollars}</span><br><br>
+    <strong>You will need: </strong><span class='ingredients recipe-info'></span>
+    <strong>Instructions: </strong><ol><span class='instructions recipe-info'>
+    </span></ol>
+    </p>`);
   recipeObject.ingredients.forEach(ingredient => {
-    ingredientsSpan.insertAdjacentHTML('afterbegin', `<ul><li>
+    $('.ingredients').append(`<ul><li>
     ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}
-    ${ingredient.name}</li></ul>
-    `)
-  })
+    ${ingredient.name}</li></ul>`);
+  });
   recipeObject.instructions.forEach(instruction => {
-    instructionsSpan.insertAdjacentHTML('beforebegin', `<li>
-    ${instruction.instruction}</li>
-    `)
-  })
+    $('.instructions').append(`<li>
+    ${instruction.instruction}</li>`);
+  });
 }
 
 function getFavorites() {
   if (user.favoriteRecipes.length) {
     user.favoriteRecipes.forEach(recipe => {
-      document.querySelector(`.favorite${recipe.id}`).classList.add('favorite-active')
+      $(`.favorite${recipe.id}`).addClass('favorite-active')
     })
   } else return
 }
 
 function populateCards(recipes) {
-  cardArea.innerHTML = '';
-  if (cardArea.classList.contains('all')) {
-    cardArea.classList.remove('all')
+  $('.all-cards').html('');
+  if ($('.all-cards[class="all"]')) {
+    $('.all-cards').removeClass('all')
   }
   recipes.forEach(recipe => {
-    cardArea.insertAdjacentHTML('afterbegin', `<div id='${recipe.id}'
+    $('.all-cards').append(`<div id='${recipe.id}'
     class='card'>
         <header id='${recipe.id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
