@@ -117,12 +117,12 @@ function displayDirections(event) {
     </span></ol>
     </p>`);
   recipeObject.ingredients.forEach(ingredient => {
-    $('.ingredients').html(`<ul><li>
+    $('.ingredients').append(`<ul><li>
     ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}
     ${ingredient.name}</li></ul>`);
   });
   recipeObject.instructions.forEach(instruction => {
-    $('.instructions').html(`<li>
+    $('.instructions').append(`<li>
     ${instruction.instruction}</li>`);
   });
 }
