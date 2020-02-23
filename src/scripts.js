@@ -12,6 +12,7 @@ import Cookbook from './cookbook';
 
 let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
+let cardArea = document.querySelector('.all-cards');
 let cookbook = new Cookbook(recipeData);
 let user, pantry;
 
@@ -129,7 +130,7 @@ function displayDirections(event) {
 function getFavorites() {
   if (user.favoriteRecipes.length) {
     user.favoriteRecipes.forEach(recipe => {
-      document.querySelector(`.favorite${recipe.id}`).classList.add('favorite-active')
+      $(`.favorite${recipe.id}`).addClass('favorite-active')
     })
   } else return
 }
