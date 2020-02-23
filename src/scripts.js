@@ -19,7 +19,7 @@ let favButton = document.querySelector('.view-favorites');
 let homeButton = document.querySelector('.home')
 let cardArea = document.querySelector('.all-cards');
 // let cookbook = new Cookbook(recipeData);
-let user, pantry;
+let user, pantry, cookbook;
 
 window.onload = onStartup();
 
@@ -28,53 +28,20 @@ favButton.addEventListener('click', viewFavorites);
 cardArea.addEventListener('click', cardButtonConditionals);
 
 function onStartup() {
-  // let userId = (Math.floor(Math.random() * 49) + 1)
-  // let newUser = users.find(user => {
-  //   return user.id === Number(userId);
-  // });
-  //new user needs to be fetched here
-  //fetch the url for the user dataset
-  //then parse the data returned
-  //then do something with the data
-      //map over the dataset
-      //for each user, instantiate a new user
-      //then instantiate their pantry
-//**We want a random new user each time on page load
-
-let myPromise = Promise.all([fetchedUsers, fetchedIngredients, fetchedRecipes])
-  .then(values => {
-    return Promise.all(values.map(response =>
-      response.json()))
-  })
-  .then(([fetchedUsers, fetchedIngredients, fetchedRecipes]) => {
-    //This is probably where we'll need to instantiate the new user/ingredients/recipe by mapping the data onto each class
-  //And probably call another function to display the data onto the page
-      //call a function to display the users
-      //won't need recipes initially, so do I need to instantiate recipes and ingredients right away
-
-
-    user = new User(fetchedUsers.wcUsersData[0].id, fetchedUsers.wcUsersData[0].name, fetchedUsers.wcUsersData[0].pantry)
-    pantry = new Pantry(fetchedUsers.wcUsersData[0].pantry);
-    // recipes = new Recipe(fetchedRecipesfetchedIngredients);
-
-      console.log(user, pantry);
-    // populateCards()
-    // console.log(fetchedIngredients.ingredientsData)
-    // console.log(fetchedRecipes.recipeData)
-  })
-  .catch(error => console.log(error.message))
-
-  // .then(response => response.json())
-  // .then(userData => console.log(data))
-  // .catch(error => console.log(err.message));
-  //For the catch, create a function that displays the error on the page to the user
-
-  //then do another fetch for recipes?? (should this be at the same time or separate??)
-  //instantiate the recipes?? or do I just pass the data as an argument for the cookbook??
-  // user = new User(userId, newUser.name, newUser.pantry)
-  // pantry = new Pantry(newUser.pantry)
-  // populateCards(cookbook.recipes);
-  // greetUser();
+  let index = (Math.floor(Math.random() * 48) + 1)
+  let startupPromise = Promise.all([fetchedUsers, fetchedIngredients, fetchedRecipes])
+    .then(values => {
+      return Promise.all(values.map(response =>
+        response.json()))
+    })
+    .then(([fetchedUsers, fetchedIngredients, fetchedRecipes]) => {
+      user = new User(fetchedUsers.wcUsersData[index].id, fetchedUsers.wcUsersData[index].name, fetchedUsers.wcUsersData[index].pantry);
+      pantry = new Pantry(user.pantry);
+      cookbook = new Cookbook(fetchedRecipes.recipeData);
+      populateCards(cookbook.recipes);
+      greetUser();
+    })
+    .catch(error => console.log(error.message))
 }
 
 function viewFavorites() {
