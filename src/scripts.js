@@ -136,12 +136,12 @@ function getFavorites() {
 }
 
 function populateCards(recipes) {
-  cardArea.innerHTML = '';
-  if (cardArea.classList.contains('all')) {
-    cardArea.classList.remove('all')
+  $('.all-cards').html('');
+  if ($('.all-cards[class="all"]')) {
+    $('.all-cards').removeClass('all')
   }
   recipes.forEach(recipe => {
-    cardArea.insertAdjacentHTML('afterbegin', `<div id='${recipe.id}'
+    $('.all-cards').append(`<div id='${recipe.id}'
     class='card'>
         <header id='${recipe.id}' class='card-header'>
           <label for='add-button' class='hidden'>Click to add recipe</label>
