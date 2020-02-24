@@ -72,12 +72,12 @@ function favoriteCard(event) {
   }
 
 function cardButtonConditionals(event) {
-  if (event.target.classList.contains('favorite')) {
+  if ($(event.target).hasClass('favorite')) {
     favoriteCard(event);
-  } else if (event.target.classList.contains('card-picture')) {
+  } else if ($(event.target).hasClass('card-picture')) {
     displayDirections(event);
-  } else if (event.target.classList.contains('home')) {
-    favButton.innerHTML = 'View Favorites';
+  } else if ($(event.target).hasClass('home')) {
+    $(favButton).html('View Favorites');
     populateCards(cookbook.recipes);
   }
 }
