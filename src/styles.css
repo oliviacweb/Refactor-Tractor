@@ -59,7 +59,7 @@ h1 {
   height: 58px;
   margin-top: 3px;
 }
-
+/*break*/
 .search-image:hover,
 .card-button:hover,
 .navButton:hover,
@@ -127,7 +127,7 @@ h1 {
 img {
   cursor: pointer;
 }
-
+/*break*/
 .card {
   background-color: #D7F2FE;
   border: 3px solid #000;

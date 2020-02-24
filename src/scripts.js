@@ -51,10 +51,9 @@ function viewFavorites() {
 }
 
 function greetUser() {
-  const userName = document.querySelector('.user-name');
-  userName.innerHTML =
-  user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0];
-}
+  $('.user-name').text(user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0]);
+  };
+
 
 function favoriteCard(event) {
   let specificRecipe = cookbook.recipes.find(recipe => {
@@ -62,23 +61,23 @@ function favoriteCard(event) {
       return recipe;
     }
   })
-  if (!event.target.classList.contains('favorite-active')) {
-    event.target.classList.add('favorite-active');
-    favButton.innerHTML = 'View Favorites';
-    user.addToFavorites(specificRecipe);
-  } else if (event.target.classList.contains('favorite-active')) {
-    event.target.classList.remove('favorite-active');
-    user.removeFromFavorites(specificRecipe)
+    if (!$(event.target).hasClass('favorite-active')) {
+      $(event.target).addClass('favorite-active');
+      $(favButton).text('View Favorites');
+      user.addToFavorites(specificRecipe);
+    } else if ($(event.target).hasClass('favorite-active')) {
+      $(event.target).removeClass('favorite-active');
+      user.removeFromFavorites(specificRecipe)
+    }
   }
-}
 
 function cardButtonConditionals(event) {
-  if (event.target.classList.contains('favorite')) {
+  if ($(event.target).hasClass('favorite')) {
     favoriteCard(event);
-  } else if (event.target.classList.contains('card-picture')) {
+  } else if ($(event.target).hasClass('card-picture')) {
     displayDirections(event);
-  } else if (event.target.classList.contains('home')) {
-    favButton.innerHTML = 'View Favorites';
+  } else if ($(event.target).hasClass('home')) {
+    $(favButton).html('View Favorites');
     populateCards(cookbook.recipes);
   }
 }

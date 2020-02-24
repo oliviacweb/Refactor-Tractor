@@ -1,8 +1,9 @@
+
 class Pantry {
-  constructor(userIngredients, allIngredients) {
-    this.contents = userIngredients;
-    this.allIngredients = allIngredients;
-  }
+constructor(userIngredients, allIngredients) {
+  this.contents = userIngredients;
+  this.allIngredients = allIngredients;
+}
 
   evaluatePantryForRecipe(recipe) {
     let result;
@@ -24,26 +25,28 @@ class Pantry {
   }
 
   determineAmountOfIngredientsMissing(recipe) {
-       const availableIngredients = this.evaluatePantryForRecipe(recipe);
-       recipe.ingredients.sort((a, b) => {
-         return a.id - b.id;
-       })
-       availableIngredients.sort((a, b) => {
-         return a.ingredient - b.ingredient;
-       })
-       return recipe.ingredients.reduce((itemsToBuy, ingredient) => {
-         let i = 0;
-           let missingItems = {
-              name: ingredient.name,
-              amountMissing: Math.round(ingredient.quantity.amount - availableIngredients[i].amount)
-            }
-          if(!missingItems.amountMissing <= 0) {
-            itemsToBuy.push(missingItems);
-          }
-           i++;
-         return itemsToBuy;
-       }, [])
+      const availableIngredients = this.evaluatePantryForRecipe(recipe);
+      recipe.ingredients.sort((a, b) => {
+        return a.id - b.id;
+      })
+      availableIngredients.sort((a, b) => {
+        return a.ingredient - b.ingredient;
+      })
+      return recipe.ingredients.reduce((itemsToBuy, ingredient) => {
+        let i = 0;
+        let missingItems = {
+          name: ingredient.name,
+          amountMissing: Math.round(ingredient.quantity.amount - availableIngredients[i].amount)
+        }
+        if(!missingItems.amountMissing <= 0) {
+          itemsToBuy.push(missingItems);
+        }
+        i++;
+        return itemsToBuy;
+      }, [])
     }
+
+
   determineCostOfMissingIngredients(recipe) {
     let cost;
     const missingIngredients = this.determineAmountOfIngredientsMissing(recipe);
