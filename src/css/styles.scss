@@ -1,3 +1,5 @@
+@import 'base';
+
 html {
   background-color: #37515C;
   border: 2px solid #000;
@@ -130,16 +132,14 @@ img {
 
 .card {
   background-color: #D7F2FE;
-  border: 3px solid #000;
+  @include black-border(3px, $black);
   width: 100%;
 }
 
-
 .card-header {
-  background-color: #EBF5EE;
+  background-color: $off-white;
   border-bottom: 1px solid #000;
-  display: flex;
-  justify-content: space-between;
+  @include flexed-container(space-between);
 }
 
 .all {
@@ -149,36 +149,34 @@ img {
 
 .all-recipe-info,
 ol {
-  color: #EBF5EE;
+  color: $off-white;
   font-size: 220%;
   width: 100%;
 }
 
 h3 {
-  color: #EBF5EE;
+  color: $off-white;
   font-size: 250%;
 }
 
 .recipe-name {
-
   display: block;
   font-size: 150%;
   text-align: center;
 }
 
-.card-picture:hover {
-  opacity: 0.7;
-}
-
-.card-picture:active {
-  border: 2px solid #000;
-}
-
 .card-picture {
-  border: 1px solid #000;
+  @include black-border(1px, $black);
   height: 200px;
   margin: 10px 3% 8px 2.6%;
   width: 94%;
+
+  &:active {
+    @include black-border(2px, $black);
+  }
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 main {
