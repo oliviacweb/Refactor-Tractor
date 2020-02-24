@@ -7,9 +7,6 @@ class Pantry {
   evaluatePantryForRecipe(recipe) {
     let result;
     let ingredientsAvailable = [];
-    // const contents = this.contents.map(content => {
-    //   return content.ingredient
-    // })
     const recipeIngredients = recipe.ingredients.map(ingredient => {
       return ingredient.id
     })
@@ -23,10 +20,7 @@ class Pantry {
         result = 'You dont have enough ingredients for this recipe';
       }
     })
-
-    // console.log(this.contents)
     return result
-
   }
 
   determineAmountOfIngredientsMissing(recipe) {
@@ -51,11 +45,20 @@ class Pantry {
        }, [])
     }
   determineCostOfMissingIngredients(recipe) {
+    let cost;
     const missingIngredients = this.determineAmountOfIngredientsMissing(recipe);
-    // console.log(this.allIngredients.name);
-    // missingIngredients.filter(ingredient => {
-    //   if(ingredient.name === )
-    })
+    const ingName = missingIngredients.map(misIng => {
+      this.allIngredients.forEach(ingredient => {
+        if(misIng.name === ingredient.name) {
+           cost = ingredient.estimatedCostInCents
+        }
+      })
+      return {
+        ingredient: misIng.name,
+        cost: (cost * misIng.amountMissing) / 100
+       }
+     })
+    return ingName;
   }
 }
 
