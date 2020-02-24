@@ -10,6 +10,7 @@ let pantry;
 let user;
 let userIngredients;
 let allIngredients;
+// let ingredientsData;
 let recipe1;
 let recipe2;
 
@@ -54,31 +55,7 @@ beforeEach(() => {
 
   userIngredients = user.pantry;
   pantry = new Pantry(userIngredients, allIngredients);
-  allIngredients = [{
-    "id": 1077,
-    "name": "full-fat milk",
-    "estimatedCostInCents": 276
-  },
-  {
-    "id": 14412,
-    "name": "ice water",
-    "estimatedCostInCents": 625
-  },
-  {
-    "id": 19304,
-    "name": "unsulfured molasses",
-    "estimatedCostInCents": 925
-  },
-  {
-    "id": 11413,
-    "name": "Potato Starch Flour",
-    "estimatedCostInCents": 895
-  },
-  {
-    "id": 93696,
-    "name": "tapioca starch",
-    "estimatedCostInCents": 656
-  }];
+  allIngredients = ingredientsData;
   recipe1 = {
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "id": 595736,
@@ -349,6 +326,15 @@ describe('pantry', () => {
       'amountMissing': 2},
       {'name': 'cheese' ,
       'amountMissing': 1}
+  ])
+  })
+  it('it should determine the cost of missing ingredients', () => {
+    pantry.determineCostOfMissingIngredients(recipe2)
+    expect(pantry.determineCostOfMissingIngredients(recipe2)).to.deep.equal([
+      {'ingredient': 'fresh basil',
+      'cost': 4.06},
+      {'ingredient': 'cheese' ,
+      'cost': 8.5}
   ])
   })
 
