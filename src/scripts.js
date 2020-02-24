@@ -1,35 +1,58 @@
 import './css/base.scss';
 import './css/styles.scss';
 
-import recipeData from './data/recipes';
-import ingredientData from './data/ingredients';
-import users from './data/users';
 import Pantry from './pantry';
 import Recipe from './recipe';
 import User from './user';
 import Cookbook from './cookbook';
 import domUpdates from './domUpdates';
+const fetchedUsers = fetch('https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/users/wcUsersData');
+const fetchedIngredients = fetch(' https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/ingredients/ingredientsData');
+const fetchedRecipes = fetch(' https://fe-apps.herokuapp.com/api/v1/whats-cookin/1911/recipes/recipeData');
 
 let favButton = $('.view-favorites');
 let homeButton = $('.home');
 let cardArea = $('.all-cards');
-let cookbook = new Cookbook(recipeData);
-let user, pantry;
+// let cookbook = new Cookbook(recipeData);
+let user, pantry, index, cookbook;
 
 homeButton.on('click', cardButtonConditionals);
 favButton.on('click', viewFavorites);
 cardArea.on('click', cardButtonConditionals);
 
 $(document).ready(function() {
-  let userId = (Math.floor(Math.random() * 49) + 1)
-  let newUser = users.find(user => {
-    return user.id === Number(userId);
-  });
-  user = new User(userId, newUser.name, newUser.pantry)
-  pantry = new Pantry(newUser.pantry)
-  populateCards(cookbook.recipes);
-  greetUser();
+  Promise.all([fetchedUsers, fetchedRecipes])
+    .then(values => {
+      return Promise.all(values.map(response =>
+        response.json()))
+    })
+    .then(([fetchedUsers, fetchedRecipes]) => {
+      index = (Math.floor(Math.random() * 48) + 1)
+      user = new User(fetchedUsers.wcUsersData[index].id, fetchedUsers.wcUsersData[index].name, fetchedUsers.wcUsersData[index].pantry);
+      pantry = new Pantry(user.pantry);
+      cookbook = new Cookbook(fetchedRecipes.recipeData);
+      populateCards(cookbook.recipes);
+      greetUser();
+    })
+    .catch(error => console.log(error.message))
 });
+
+// function onStartup() {
+//   let index = (Math.floor(Math.random() * 48) + 1)
+//   let startupPromise = Promise.all([fetchedUsers, fetchedIngredients, fetchedRecipes])
+//     .then(values => {
+//       return Promise.all(values.map(response =>
+//         response.json()))
+//     })
+//     .then(([fetchedUsers, fetchedIngredients, fetchedRecipes]) => {
+//       user = new User(fetchedUsers.wcUsersData[index].id, fetchedUsers.wcUsersData[index].name, fetchedUsers.wcUsersData[index].pantry);
+//       pantry = new Pantry(user.pantry);
+//       cookbook = new Cookbook(fetchedRecipes.recipeData);
+//       populateCards(cookbook.recipes);
+//       greetUser();
+//     })
+//     .catch(error => console.log(error.message))
+// }
 
 function viewFavorites() {
   if (cardArea.hasClass('all')) {
@@ -130,3 +153,5 @@ function populateCards(recipes) {
   });
   getFavorites();
 }
+
+
