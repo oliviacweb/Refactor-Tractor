@@ -351,6 +351,15 @@ describe('pantry', () => {
       'amountMissing': 1}
   ])
   })
+  it('it should determine the cost of missing ingredients', () => {
+    pantry.determineCostOfMissingIngredients(recipe2)
+    expect(pantry.determineCostOfIngredientsMissing(recipe2)).to.deep.equal([
+      {'name': 'fresh basil',
+      'amountMissing': 2},
+      {'name': 'cheese' ,
+      'amountMissing': 1}
+  ])
+  })
 
 
 });

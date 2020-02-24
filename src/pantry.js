@@ -50,6 +50,13 @@ class Pantry {
          return itemsToBuy;
        }, [])
     }
+  determineCostOfMissingIngredients(recipe) {
+    const missingIngredients = this.determineAmountOfIngredientsMissing(recipe);
+    // console.log(this.allIngredients.name);
+    // missingIngredients.filter(ingredient => {
+    //   if(ingredient.name === )
+    })
+  }
 }
 
 export default Pantry;
