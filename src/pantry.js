@@ -63,6 +63,33 @@ constructor(userIngredients, allIngredients) {
      })
     return ingName;
   }
+
+  addRequiredIngredientsToPantry(recipe) {
+    let x;
+    let updateIng;
+    let insufficientIngredients = this.determineAmountOfIngredientsMissing(recipe);
+    insufficientIngredients.map(insufficientIng => {
+      this.allIngredients.forEach(ingredient => {
+        if(insufficientIng.name === ingredient.name) {
+           x = ingredient;
+        }
+      })
+      updateIng = this.contents.find(content => {
+        return content.ingredient === x.id;
+      })
+      this.contents.push({
+        ingredient: x.id,
+        amount: insufficientIng.amountMissing + updateIng.amount
+      });
+      console.log(this.contents);
+    });
+  }
+
+  removeIngredientsAfterCooking() {
+
+  }
+
+
 }
 
 export default Pantry;
