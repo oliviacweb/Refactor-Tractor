@@ -319,28 +319,35 @@ describe('pantry', () => {
     ])
 
   })
-  it('it should determine the amount of ingrdients are missing', () => {
+  it('should determine the amount of ingrdients are missing', () => {
     pantry.determineAmountOfIngredientsMissing(recipe2)
     expect(pantry.determineAmountOfIngredientsMissing(recipe2)).to.deep.equal([
       {'name': 'fresh basil',
       'amountMissing': 2},
       {'name': 'cheese' ,
       'amountMissing': 1}
-  ])
+    ])
   })
-  it('it should determine the cost of missing ingredients', () => {
+
+  it('should determine the cost of missing ingredients', () => {
     pantry.determineCostOfMissingIngredients(recipe2)
     expect(pantry.determineCostOfMissingIngredients(recipe2)).to.deep.equal([
       {'ingredient': 'fresh basil',
       'cost': 4.06},
       {'ingredient': 'cheese' ,
       'cost': 8.5}
-  ])
+    ])
+  })
+
+  it('should add required ingredients to users pantry' () => {
+    pantry.addRequiredIngredientsToPantry();
+    expect(this.contents).to.deep.equal([]);
+  })
+
+  it('should remove recipe ingredients from pantry after cooking' () => {
+    pantry.removeIngredientsAfterCooking();
+    expect.(this.contents).to.deep.equal([])
   })
 
 
 });
-
-// want to compare user.pantry to recipe.ingredients
-// to see if there are the necessary ingredients
-// to cook a specific recipe are in the user's pantry
