@@ -39,7 +39,7 @@ class User {
   }
 
   // checkPantry() {
-    //sends a call to the pantry class where methods already exist
+  //sends a call to the pantry class where methods already exist
   // }
 }
 

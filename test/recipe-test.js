@@ -74,9 +74,4 @@ describe('Recipe', () => {
   it('should be able to calulate the cost of its ingredients', () => {
     expect(recipe.calculateCost()).to.equal(4166)
   })
-
-  // it('should not be able to calculate the cost if ingredient ids do not match', () => {
-  //   expect(recipe2.calculateCost().to.equal("Cannot find ingredient"))
-  // })
-
 })
