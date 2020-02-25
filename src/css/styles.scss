@@ -2,7 +2,7 @@
 
 html {
   background-color: #37515C;
-  border: 2px solid #000;
+  @include black-border(2px, $black);
   height: 100vh;
 }
 
@@ -15,10 +15,9 @@ body {
 
 .main-header {
   background-color: #EBF5EE;
-  border: 2px solid #000;
-  display: flex;
+  @include black-border(2px, $black);
+  @include flexed-container(space-between);
   height: auto;
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -56,12 +55,12 @@ h1 {
 
 .search-button {
   background-color: #EBF5EE;
-  border: 1px solid #000;
+  @include black-border(1px, $black);
   width: 20%;
   height: 58px;
   margin-top: 3px;
 }
-
+// -----
 .search-image:hover,
 .card-button:hover,
 .navButton:hover,
