@@ -319,6 +319,7 @@ describe('pantry', () => {
     ])
 
   })
+
   it('should determine the amount of ingrdients are missing', () => {
     pantry.determineAmountOfIngredientsMissing(recipe2)
     expect(pantry.determineAmountOfIngredientsMissing(recipe2)).to.deep.equal([
@@ -339,14 +340,26 @@ describe('pantry', () => {
     ])
   })
 
-  it('should add required ingredients to users pantry' () => {
-    pantry.addRequiredIngredientsToPantry();
-    expect(this.contents).to.deep.equal([]);
+  it('should add required ingredients to users pantry', () => {
+    pantry.addRequiredIngredientsToPantry(recipe2);
+    expect(pantry.contents).to.deep.equal([
+      { ingredient: 1077, amount: 1 },
+      { ingredient: 14412, amount: 1 },
+      { ingredient: 19304, amount: 3 },
+      { ingredient: 1041009, amount: 1 },
+      { ingredient: 10018413, amount: 1 },
+      { ingredient: 2044, amount: 1 },
+      { ingredient: 10111529, amount: 0.5 },
+      { ingredient: 4053, amount: 1 },
+      { ingredient: 11477, amount: 1 },
+      { ingredient: 2044, amount: 3 },
+      { ingredient: 1041009, amount: 2 }
+    ]);
   })
 
-  it('should remove recipe ingredients from pantry after cooking' () => {
-    pantry.removeIngredientsAfterCooking();
-    expect.(this.contents).to.deep.equal([])
+  it.skip('should remove recipe ingredients from pantry after cooking', () => {
+    pantry.removeIngredientsAfterCooking(recipe2);
+    expect(pantry.contents).to.deep.equal([]);
   })
 
 
