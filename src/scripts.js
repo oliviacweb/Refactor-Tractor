@@ -14,13 +14,14 @@ let favButton = $('.view-favorites');
 let homeButton = $('.home');
 let cardArea = $('.all-cards');
 // let cookbook = new Cookbook(recipeData);
-let user; 
-let userData; 
+let user;
+let userData;
 let pantry;
-let index; 
-let cookbook; 
-let ingredientsData; 
+let index;
+let cookbook;
+let ingredientsData;
 let recipeData;
+
 
 homeButton.on('click', cardButtonConditionals);
 favButton.on('click', viewFavorites);
@@ -29,7 +30,8 @@ cardArea.on('click', cardButtonConditionals);
 const loadPageHandler = () => {
   generateUser(userData);
   populateCards(recipeData);
-  // greetUser()
+  greetUser();
+  console.log(user)
 }
 
 fetchData().then(data => {
@@ -41,11 +43,12 @@ fetchData().then(data => {
   .catch(error => console.log(error.message))
 
 function generateUser(userData) {
-  index = (Math.floor(Math.random() * 48) + 1)
-  user = new User(userData.id, userData.name, userData.pantry);
-  pantry = new Pantry(user.pantry)
+  index = (Math.floor(Math.random() * 48) + 1);
+  let randomUser = userData[index];
+  console.log(randomUser);
+  user = new User(randomUser.id, randomUser.name, randomUser.pantry);
+  pantry = new Pantry(user.pantry);
   cookbook = new Cookbook(recipeData);
- 
 }
 
 // $(document).ready(function() {
@@ -84,9 +87,9 @@ function viewFavorites() {
   getFavorites();
 }
 
-// function greetUser() {
-//   $('.user-name').text(user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0]);
-// };
+function greetUser() {
+  $('.user-name').text(user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0]);
+};
 
 
 function favoriteCard(event) {
@@ -167,5 +170,3 @@ function populateCards(recipes) {
   });
   getFavorites();
 }
-
-
