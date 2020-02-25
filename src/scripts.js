@@ -47,7 +47,7 @@ function generateUser(userData) {
   let randomUser = userData[index];
   console.log(randomUser);
   user = new User(randomUser.id, randomUser.name, randomUser.pantry);
-  pantry = new Pantry(user.pantry);
+  pantry = new Pantry(randomUser.pantry);
   cookbook = new Cookbook(recipeData);
 }
 
@@ -122,7 +122,8 @@ function cardButtonConditionals(event) {
 function displayDirections(event) {
   cookbook = new Cookbook(recipeData);
   let newRecipeInfo = cookbook.recipes.find(recipe => {
-    if (recipe.id === Number(event.target.id)) {
+    // if (recipe.id === Number(event.target.id))
+     if (recipe.id === Number(event.target.id)){
       return recipe;
     }
   })
@@ -141,7 +142,7 @@ function displayDirections(event) {
   recipeObject.ingredients.forEach(ingredient => {
     $('.ingredients').append(`<ul><li>
     ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}
-    ${ingredient.name}</li></ul>`);
+    ${recipeObject.getRecipeIngredientName(ingredient.id)}</li></ul>`);
   });
   recipeObject.instructions.forEach(instruction => {
     $('.instructions').append(`<li>
