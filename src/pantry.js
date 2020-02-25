@@ -65,6 +65,8 @@ constructor(userIngredients, allIngredients) {
   }
 
   addRequiredIngredientsToPantry(recipe) {
+    //need to have another array returned out of the evaluatePantryForRecipe(recipe) method
+    //concat the two arrays, and then resume functionality
     let x;
     let updateIng;
     let insufficientIngredients = this.determineAmountOfIngredientsMissing(recipe);
@@ -77,11 +79,15 @@ constructor(userIngredients, allIngredients) {
       updateIng = this.contents.find(content => {
         return content.ingredient === x.id;
       })
-      this.contents.push({
-        ingredient: x.id,
-        amount: insufficientIng.amountMissing + updateIng.amount
-      });
-      console.log(this.contents);
+      this.contents.forEach(content => {
+        if(content.ingredient === x.id) {
+          this.contents.splice(this.contents.indexOf(content), 1, {
+            ingredient: x.id,
+            amount: insufficientIng.amountMissing + updateIng.amount
+          });
+          console.log(this.contents);
+        }
+      })
     });
   }
 
