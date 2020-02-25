@@ -346,14 +346,13 @@ describe('pantry', () => {
       { ingredient: 1077, amount: 1 },
       { ingredient: 14412, amount: 1 },
       { ingredient: 19304, amount: 3 },
-      { ingredient: 1041009, amount: 1 },
+      { ingredient: 1041009, amount: 2 },
       { ingredient: 10018413, amount: 1 },
-      { ingredient: 2044, amount: 1 },
+      { ingredient: 2044, amount: 3 },
       { ingredient: 10111529, amount: 0.5 },
       { ingredient: 4053, amount: 1 },
-      { ingredient: 11477, amount: 1 },
-      { ingredient: 2044, amount: 3 },
-      { ingredient: 1041009, amount: 2 }
+      { ingredient: 11477, amount: 1 }
+
     ]);
   })
 
