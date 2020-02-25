@@ -1,4 +1,3 @@
-
 class Pantry {
   constructor(userIngredients, allIngredients) {
     this.contents = userIngredients;
@@ -62,6 +61,45 @@ class Pantry {
       }
     })
     return ingName;
+  }
+
+  addRequiredIngredientsToPantry(recipe) {
+    //need to have another array returned out of the evaluatePantryForRecipe(recipe) method
+    //concat the two arrays, and then resume functionality
+    let x;
+    let updateIng;
+    let insufficientIngredients = this.determineAmountOfIngredientsMissing(recipe);
+    insufficientIngredients.map(insufficientIng => {
+      this.allIngredients.forEach(ingredient => {
+        if(insufficientIng.name === ingredient.name) {
+           x = ingredient;
+        }
+      })
+      updateIng = this.contents.find(content => {
+        return content.ingredient === x.id;
+      })
+      this.contents.forEach(content => {
+        if(content.ingredient === x.id) {
+          this.contents.splice(this.contents.indexOf(content), 1, {
+            ingredient: x.id,
+            amount: insufficientIng.amountMissing + updateIng.amount
+          });
+        }
+      })
+    });
+  }
+
+  removeIngredientsAfterCooking(user, recipe) {
+    let usedIng;
+    if(user.cookedRecipes.includes(recipe)) {
+      recipe.ingredients.forEach(ingredient => {
+        usedIng = this.contents.find(content => content.ingredient === ingredient.id),
+        this.contents.splice(this.contents.indexOf(usedIng), 1, {
+          ingredient: content.ingredient,
+          amount: usedIng.amount - ingredient.quantity.amount
+        });
+      });
+    }
   }
 }
 
