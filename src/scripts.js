@@ -52,7 +52,7 @@ function viewFavorites() {
 
 function greetUser() {
   $('.user-name').text(user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0]);
-  };
+}
 
 
 function favoriteCard(event) {
@@ -61,15 +61,15 @@ function favoriteCard(event) {
       return recipe;
     }
   })
-    if (!$(event.target).hasClass('favorite-active')) {
-      $(event.target).addClass('favorite-active');
-      $(favButton).text('View Favorites');
-      user.addToFavorites(specificRecipe);
-    } else if ($(event.target).hasClass('favorite-active')) {
-      $(event.target).removeClass('favorite-active');
-      user.removeFromFavorites(specificRecipe)
-    }
+  if (!$(event.target).hasClass('favorite-active')) {
+    $(event.target).addClass('favorite-active');
+    $(favButton).text('View Favorites');
+    user.addToFavorites(specificRecipe);
+  } else if ($(event.target).hasClass('favorite-active')) {
+    $(event.target).removeClass('favorite-active');
+    user.removeFromFavorites(specificRecipe)
   }
+}
 
 function cardButtonConditionals(event) {
   if ($(event.target).hasClass('favorite')) {
