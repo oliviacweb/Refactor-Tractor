@@ -117,28 +117,13 @@ function cardButtonConditionals(event) {
 }
 
 function displayDirections(event) {
-  // Promise.all([fetchedRecipes, fetchedIngredients])
-  //   .then(values => {
-  //     return Promise.all(values.map(response =>
-  //       response.json()))
-  //   })
-  //   .then(([fetchedRecipes, fetchedIngredients]) => {
-  //     // cookbook = new Cookbook(fetchedRecipes.recipeData);
-      // let newRecipeInfo = cookbook.recipes.find(recipe => {
-      //   if (recipe.id === Number(event.target.id)) {
-      //     return recipe;
-      //   }
-  //       console.log('newRecipeInfo5')
-  //     })
-  console.log(event)
   cookbook = new Cookbook(recipeData);
   let newRecipeInfo = cookbook.recipes.find(recipe => {
-        if (recipe.id === Number(event.target.id)) {
-          return recipe;
-        }
+    if (recipe.id === Number(event.target.id)) {
+      return recipe;
+    }
   })
   let recipeObject = new Recipe(newRecipeInfo, ingredientsData);
-  // console.log(recipeObject)
   let cost = recipeObject.calculateCost()
   let costInDollars = (cost / 100).toFixed(2)
   $('.all-cards').addClass('all');
@@ -159,8 +144,6 @@ function displayDirections(event) {
     $('.instructions').append(`<li>
     ${instruction.instruction}</li>`);
   });
-
-    
 }
 
 function getFavorites() {
