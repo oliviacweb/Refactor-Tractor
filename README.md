@@ -3,6 +3,11 @@
 ## Abstract
 Refactor Tractor is a project where we were in charge of refactoring a previously completed project called What's Cookin'. What's Cookin' was an app that allowed users to find, favorite and add recipes they wished to cook. The recipes included required ingredients and instructions and an estimated cost for their ingredients. The refactoring that we did for this project included refactoring vanilla JavaScript into jQuery and refactoring our CSS into SCSS/SASS. Additionally we implemented Fetch() to retrieve user, recipe and ingredient data from the server.
 
+## Contributors
+[Tanisha Davey](https://github.com/tanishalatoya)
+[Olivia Webster](https://github.com/oliviacweb)
+[Kimala Cochran](https://github.com/kimalajoy)
+
 ## Screenshots of the app
 
 ![homepage](https://user-images.githubusercontent.com/54754467/75359612-df5a3080-5871-11ea-9fc3-8eb95ae4107a.png)
