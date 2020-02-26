@@ -91,7 +91,7 @@ h1 {
 
 .add-button {
   background-color: #EBF5EE;
-  @include flexed-container;
+  @include flexed-container(flex);
   width: 12%;
 }
 
