@@ -35,12 +35,15 @@ class User {
   }
 
   saveRecipesToCook(recipe) {
-    this.recipesToCook.push(recipe)
+    // this.recipesToCook.push(recipe)
+    if (!this.recipesToCook.includes(recipe)) {
+      this.recipesToCook.push(recipe)
+    }
   }
-
-  // checkPantry() {
-  //sends a call to the pantry class where methods already exist
-  // }
+  removeRecipesToCook(recipe) {
+    const i = this.recipesToCook.indexOf(recipe);
+    this.recipesToCook.splice(i, 1)
+  }
 }
 
 
