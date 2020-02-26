@@ -12,7 +12,7 @@ class Recipe {
   getRecipeInstructions () {
     return this.instructions
   }
-  
+
   calculateCost() {
     let costCounter = 0;
     let result;
@@ -20,7 +20,7 @@ class Recipe {
       this.ingredientsData.find(specificIngredient => {
         if (specificIngredient.id === ingredient.id) {
           costCounter += (Number(specificIngredient.estimatedCostInCents) *
-          Number(ingredient.quantity.amount)) 
+          Number(ingredient.quantity.amount))
           result = costCounter
         }
       })
@@ -28,7 +28,13 @@ class Recipe {
     return result;
     // does the DOM handle converting this to dollars?
   }
-  //sad paths?
+  getRecipeIngredientName(id) {
+    let ingredientName;
+    let ingredient = this.ingredientsData.find(ingredient => {
+      return id === ingredient.id
+    })
+    return ingredientName = ingredient.name
+  }
 
 }
 
