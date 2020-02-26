@@ -1,9 +1,9 @@
 import './css/base.scss';
 import './css/styles.scss';
+import $ from 'jquery';
+import fetchData from './index.js';
 
-import recipeData from './data/recipes';
-import ingredientData from './data/ingredients';
-import users from './data/users';
+
 import Pantry from './pantry';
 import Recipe from './recipe';
 import User from './user';
@@ -13,23 +13,60 @@ import domUpdates from './domUpdates';
 let favButton = $('.view-favorites');
 let homeButton = $('.home');
 let cardArea = $('.all-cards');
-let cookbook = new Cookbook(recipeData);
-let user, pantry;
+// let cookbook = new Cookbook(recipeData);
+let user;
+let userData;
+let pantry;
+let index;
+let cookbook;
+let ingredientsData;
+let recipeData;
+
 
 homeButton.on('click', cardButtonConditionals);
 favButton.on('click', viewFavorites);
 cardArea.on('click', cardButtonConditionals);
 
-$(document).ready(function() {
-  let userId = (Math.floor(Math.random() * 49) + 1)
-  let newUser = users.find(user => {
-    return user.id === Number(userId);
-  });
-  user = new User(userId, newUser.name, newUser.pantry)
-  pantry = new Pantry(newUser.pantry)
-  populateCards(cookbook.recipes);
+const loadPageHandler = () => {
+  generateUser(userData);
+  populateCards(recipeData);
   greetUser();
-});
+  console.log(user)
+}
+
+fetchData().then(data => {
+  userData = data.userData;
+  ingredientsData = data.ingredientsData;
+  recipeData = data.recipeData;
+})
+  .then(loadPageHandler)
+  .catch(error => console.log(error.message))
+
+function generateUser(userData) {
+  index = (Math.floor(Math.random() * 48) + 1);
+  let randomUser = userData[index];
+  console.log(randomUser);
+  user = new User(randomUser.id, randomUser.name, randomUser.pantry);
+  pantry = new Pantry(user.pantry);
+  cookbook = new Cookbook(recipeData);
+}
+
+// $(document).ready(function() {
+//   Promise.all([fetchedUsers, fetchedRecipes])
+//     .then(values => {
+//       return Promise.all(values.map(response =>
+//         response.json()))
+//     })
+//     // .then(([fetchedUsers, fetchedRecipes]) => {
+//       // index = (Math.floor(Math.random() * 48) + 1)
+//       // user = new User(fetchedUsers.wcUsersData[index].id, fetchedUsers.wcUsersData[index].name, fetchedUsers.wcUsersData[index].pantry);
+//       // pantry = new Pantry(user.pantry);
+//       // cookbook = new Cookbook(fetchedRecipes.recipeData);
+//       // populateCards(cookbook.recipes);
+//       // greetUser();
+//     })
+//     // .catch(error => console.log(error.message))
+// });
 
 function viewFavorites() {
   if (cardArea.hasClass('all')) {
@@ -52,7 +89,7 @@ function viewFavorites() {
 
 function greetUser() {
   $('.user-name').text(user.name.split(' ')[0] + ' ' + user.name.split(' ')[1][0]);
-  };
+};
 
 
 function favoriteCard(event) {
@@ -61,15 +98,15 @@ function favoriteCard(event) {
       return recipe;
     }
   })
-    if (!$(event.target).hasClass('favorite-active')) {
-      $(event.target).addClass('favorite-active');
-      $(favButton).text('View Favorites');
-      user.addToFavorites(specificRecipe);
-    } else if ($(event.target).hasClass('favorite-active')) {
-      $(event.target).removeClass('favorite-active');
-      user.removeFromFavorites(specificRecipe)
-    }
+  if (!$(event.target).hasClass('favorite-active')) {
+    $(event.target).addClass('favorite-active');
+    $(favButton).text('View Favorites');
+    user.addToFavorites(specificRecipe);
+  } else if ($(event.target).hasClass('favorite-active')) {
+    $(event.target).removeClass('favorite-active');
+    user.removeFromFavorites(specificRecipe)
   }
+}
 
 function cardButtonConditionals(event) {
   if ($(event.target).hasClass('favorite')) {
@@ -83,12 +120,13 @@ function cardButtonConditionals(event) {
 }
 
 function displayDirections(event) {
+  cookbook = new Cookbook(recipeData);
   let newRecipeInfo = cookbook.recipes.find(recipe => {
     if (recipe.id === Number(event.target.id)) {
       return recipe;
     }
   })
-  let recipeObject = new Recipe(newRecipeInfo, ingredientData);
+  let recipeObject = new Recipe(newRecipeInfo, ingredientsData);
   let cost = recipeObject.calculateCost()
   let costInDollars = (cost / 100).toFixed(2)
   $('.all-cards').addClass('all');
@@ -119,6 +157,8 @@ function getFavorites() {
   }
 }
 
+
+// createCards(recipeData);
 function populateCards(recipes) {
   cardArea.empty();
   if (cardArea.hasClass('all')) {

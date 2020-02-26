@@ -29,27 +29,27 @@ beforeEach(() => {
       'amount': 3
     },
     {'ingredient': 1041009,
-    'amount': 1
+      'amount': 1
     },
     {
-    'ingredient': 10018413,
-    'amount': 1
+      'ingredient': 10018413,
+      'amount': 1
     },
     {
-    'ingredient': 2044,
-    'amount': 1
+      'ingredient': 2044,
+      'amount': 1
     },
     {
-    'ingredient': 10111529,
-    'amount': 0.5
+      'ingredient': 10111529,
+      'amount': 0.5
     },
     {
-    'ingredient': 4053,
-    'amount': 1
+      'ingredient': 4053,
+      'amount': 1
     },
     {
-    'ingredient': 11477,
-    'amount': 1
+      'ingredient': 11477,
+      'amount': 1
     }
   ])
 
@@ -276,29 +276,29 @@ describe('pantry', () => {
         'amount': 3
       },
       {'ingredient': 1041009,
-      'amount': 1
+        'amount': 1
       },
       {
-      'ingredient': 10018413,
-      'amount': 1
+        'ingredient': 10018413,
+        'amount': 1
       },
       {
-      'ingredient': 2044,
-      'amount': 1
+        'ingredient': 2044,
+        'amount': 1
       },
       {
-      'ingredient': 10111529,
-      'amount': 0.5
+        'ingredient': 10111529,
+        'amount': 0.5
       },
       {
-      'ingredient': 4053,
-      'amount': 1
+        'ingredient': 4053,
+        'amount': 1
       },
       {
-      'ingredient': 11477,
-      'amount': 1
+        'ingredient': 11477,
+        'amount': 1
       }
-      ])
+    ])
   })
 
   it('should have access to all ingredients', () => {
@@ -310,37 +310,66 @@ describe('pantry', () => {
     expect(pantry.evaluatePantryForRecipe(recipe1)).to.equal('You dont have enough ingredients for this recipe');
     pantry.evaluatePantryForRecipe(recipe2);
     expect(pantry.evaluatePantryForRecipe(recipe2)).to.deep.equal([
-          { ingredient: 1041009, amount: 1 },
-          { ingredient: 10018413, amount: 1 },
-          { ingredient: 2044, amount: 1 },
-          { ingredient: 10111529, amount: 0.5 },
-          { ingredient: 4053, amount: 1 },
-          { ingredient: 11477, amount: 1 }
+      { ingredient: 1041009, amount: 1 },
+      { ingredient: 10018413, amount: 1 },
+      { ingredient: 2044, amount: 1 },
+      { ingredient: 10111529, amount: 0.5 },
+      { ingredient: 4053, amount: 1 },
+      { ingredient: 11477, amount: 1 }
     ])
 
   })
-  it('it should determine the amount of ingrdients are missing', () => {
+
+  it('should determine the amount of ingrdients are missing', () => {
     pantry.determineAmountOfIngredientsMissing(recipe2)
     expect(pantry.determineAmountOfIngredientsMissing(recipe2)).to.deep.equal([
       {'name': 'fresh basil',
-      'amountMissing': 2},
+        'amountMissing': 2},
       {'name': 'cheese' ,
-      'amountMissing': 1}
-  ])
+        'amountMissing': 1}
+    ])
   })
-  it('it should determine the cost of missing ingredients', () => {
+
+  it('should determine the cost of missing ingredients', () => {
     pantry.determineCostOfMissingIngredients(recipe2)
     expect(pantry.determineCostOfMissingIngredients(recipe2)).to.deep.equal([
       {'ingredient': 'fresh basil',
-      'cost': 4.06},
+        'cost': 4.06},
       {'ingredient': 'cheese' ,
       'cost': 8.5}
-  ])
+    ])
+  })
+
+  it('should add required ingredients to users pantry', () => {
+    pantry.addRequiredIngredientsToPantry(recipe2);
+    expect(pantry.contents).to.deep.equal([
+      { ingredient: 1077, amount: 1 },
+      { ingredient: 14412, amount: 1 },
+      { ingredient: 19304, amount: 3 },
+      { ingredient: 1041009, amount: 2 },
+      { ingredient: 10018413, amount: 1 },
+      { ingredient: 2044, amount: 3 },
+      { ingredient: 10111529, amount: 0.5 },
+      { ingredient: 4053, amount: 1 },
+      { ingredient: 11477, amount: 1 }
+
+    ]);
+  })
+
+  it('should remove recipe ingredients from pantry after cooking', () => {
+    pantry.removeIngredientsAfterCooking(user, recipe2);
+    expect(pantry.contents).to.deep.equal([
+      { ingredient: 1077, amount: 1 },
+      { ingredient: 14412, amount: 1 },
+      { ingredient: 19304, amount: 3 },
+      { ingredient: 1041009, amount: 1 },
+      { ingredient: 10018413, amount: 1 },
+      { ingredient: 2044, amount: 1 },
+      { ingredient: 10111529, amount: 0.5 },
+      { ingredient: 4053, amount: 1 },
+      { ingredient: 11477, amount: 1 }
+    ]);
   })
 
 
 });
-
-// want to compare user.pantry to recipe.ingredients
-// to see if there are the necessary ingredients
-// to cook a specific recipe are in the user's pantry
