@@ -5,7 +5,9 @@ Refactor Tractor is a project where we were in charge of refactoring a previousl
 
 ## Contributors
 [Tanisha Davey](https://github.com/tanishalatoya)
+
 [Olivia Webster](https://github.com/oliviacweb)
+
 [Kimala Cochran](https://github.com/kimalajoy)
 
 ## Screenshots of the app
